@@ -30,9 +30,9 @@ void particle_emitter::create_particle( int type){
   if( type == 0){
     // Smoke
     particle newPart1( random( min_pos.x, max_pos.x), random( min_pos.y - 40, max_pos.y - 40),
-                      vec2( randomf( -0.1, 0.2), randomf( -1, -2)),
-                      vec2( 0.03, -0.03),
-                      random( 5, 8), 0xFFFFFF, 0x000000, random( 100, 200));
+                      vec2( randomf( -0.1, 0.2), randomf( -0.1, -0.5)),
+                      vec2( 0.003, -0.003),
+                      random( 5, 8), 0xFFFFFF, 0x000000, random( 500, 1000), IMAGE);
     newPart1.set_image( image);
     particles.push_back( newPart1);
     this -> type = type;
@@ -43,7 +43,7 @@ void particle_emitter::create_particle( int type){
     particle newPart4( random( min_pos.x, max_pos.x), random( min_pos.y, max_pos.y),
                       vec2( randomf( -0.5, 0.5), randomf( -1, -2)),
                       vec2( 0, randomf( 0.01, 0.03)),
-                      random( 4, 8), 0xFFAA00, 0xFF0000, random( 20, 80));
+                      random( 4, 8), 0xFFAA00, 0xFF0000, random( 20, 80), SQUARE);
     particles.push_back( newPart4);
     this -> type = type;
   }
@@ -53,7 +53,7 @@ void particle_emitter::create_particle( int type){
     particle newPart2( random( min_pos.x, max_pos.x), random( min_pos.y, max_pos.y),
                       vec2( randomf( -1, 1), randomf( -10, -5)),
                       vec2( 0, 0.1),
-                      random( 6, 8), 0x0000FF, 0x000000, random( 200, 800));
+                      random( 4, 6), 0x0000FF, 0x000000, random( 200, 800), CIRCLE);
     particles.push_back( newPart2);
     this -> type = type;
   }
@@ -63,7 +63,7 @@ void particle_emitter::create_particle( int type){
     particle newPart3( min_pos.x, min_pos.y,
                       vec2( randomf( -2, 2), randomf( -3, -5)),
                       vec2( 0, randomf( 0.1, 0.2)),
-                      random( 1, 3), 0xFFAA00, 0xFF0000, random( 10, 50));
+                      random( 1, 3), 0xFFAA00, 0xFF0000, random( 10, 50), PIXEL);
     particles.push_back( newPart3);
     this -> type = type;
   }

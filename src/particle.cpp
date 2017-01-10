@@ -1,7 +1,7 @@
 #include "particle.h"
 
 // Constructor
-particle::particle( int x, int y, vec2 velocity, vec2 acceleration, int size, int colorStart, int colorEnd, int life){
+particle::particle( int x = 0, int y = 0, vec2 velocity = vec2( 0, 0), vec2 acceleration = vec2( 0, 0), int size = 1, int colorStart = 0xFFFFFF, int colorEnd = 0xFFFFFF, int life = 100, char type = PIXEL){
   this -> x = x;
   this -> y = y;
 
@@ -18,6 +18,8 @@ particle::particle( int x, int y, vec2 velocity, vec2 acceleration, int size, in
   type = CIRCLE;
 
   this -> image = NULL;
+
+  this -> type = type;
 }
 
 // Make new color

@@ -90,7 +90,7 @@ void setup(){
 void update( int dt){
   // Make particles
   if( key[KEY_Z] || key[KEY_X] || key[KEY_C] || key[KEY_V]){
-    for( int i = 0; i < my_emitters.size(); i ++){
+    for( unsigned int i = 0; i < my_emitters.size(); i ++){
       if( key[KEY_Z])
         my_emitters.at(i).create_particle( 0);
       if( key[KEY_X])
@@ -101,7 +101,7 @@ void update( int dt){
         my_emitters.at(i).create_particle( 3);
     }
   }
-  for( int i = 0; i < my_emitters.size(); i ++){
+  for( unsigned int i = 0; i < my_emitters.size(); i ++){
     my_emitters.at(i).update( dt);
     my_emitters.at(i).move_to( vec2( mouse_x, mouse_y));
   }
@@ -112,7 +112,7 @@ void draw(){
   // Clear buffer
   clear_to_color( buffer, 0x000000);
 
-  for( int i = 0; i < my_emitters.size(); i ++){
+  for( unsigned int i = 0; i < my_emitters.size(); i ++){
     my_emitters.at(i).draw( buffer);
   }
 
