@@ -75,13 +75,14 @@ void setup(){
 
   // Allegro video
   set_color_depth( 32);
-  set_gfx_mode( GFX_AUTODETECT_WINDOWED, 640, 480, 0, 0);
+  //set_gfx_mode( GFX_AUTODETECT_FULLSCREEN, 1920, 1080, 0, 0);
+  set_gfx_mode( GFX_AUTODETECT_WINDOWED, 1280, 960, 0, 0);
 
   // Create buffer
   buffer = create_bitmap( SCREEN_W, SCREEN_H);
 
   for( int i = 0; i < 20; i ++){
-    particle_emitter tempEmitter = particle_emitter( vec2( 0, 0), vec2( 10, 0));
+    particle_emitter tempEmitter = particle_emitter( vec2( 0, 0), vec2( 0, 0));
     my_emitters.push_back(tempEmitter);
   }
 }
@@ -91,14 +92,22 @@ void update( int dt){
   // Make particles
   if( key[KEY_Z] || key[KEY_X] || key[KEY_C] || key[KEY_V]){
     for( unsigned int i = 0; i < my_emitters.size(); i ++){
-      if( key[KEY_Z])
+      if( key[KEY_Z]){
+        my_emitters.at(i).set_size( vec2( 10, 10));
         my_emitters.at(i).create_particle( 0);
-      if( key[KEY_X])
+      }
+      if( key[KEY_X]){
+        my_emitters.at(i).set_size( vec2( 100, 0));
         my_emitters.at(i).create_particle( 1);
-      if( key[KEY_C])
+      }
+      if( key[KEY_C]){
+        my_emitters.at(i).set_size( vec2( 2, 0));
         my_emitters.at(i).create_particle( 2);
-      if( key[KEY_V])
+      }
+      if( key[KEY_V]){
+        my_emitters.at(i).set_size( vec2( 0, 0));
         my_emitters.at(i).create_particle( 3);
+      }
     }
   }
   for( unsigned int i = 0; i < my_emitters.size(); i ++){
@@ -119,8 +128,14 @@ void draw(){
   // FPS
   textprintf_ex( buffer, font, 0, 0, 0xFFFFFF, -1, "%i", fps);
 
+  // Show how many particles are on screen
+  int number_particles = 0;
+  for( unsigned int i = 0; i < my_emitters.size(); i ++)
+    number_particles += my_emitters.at(i).get_size();
+  textprintf_ex( buffer, font, 0, 30, 0xFFFFFF, -1, "# Particles:%i", number_particles);
+
   // Draw buffer
-  blit( buffer, screen, 0, 0, 0, 0, 640, 480);
+  draw_sprite( screen, buffer, 0, 0);
 }
 
 // Main

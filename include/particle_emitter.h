@@ -17,7 +17,7 @@ class particle_emitter{
   public:
     // Constructor
     particle_emitter();
-    particle_emitter( vec2 min_pos, vec2 max_pos);
+    particle_emitter( vec2 position, vec2 size);
 
     // Destructor
     virtual ~particle_emitter();
@@ -28,8 +28,14 @@ class particle_emitter{
     // Move
     void move_to( vec2 position);
 
+    // Size
+    void set_size( vec2 size){ this -> size = size; };
+
     // Update
     void update( int dt);
+
+    // Get size
+    int get_size(){ return particles.size(); }
 
     // Draw
     void draw( BITMAP *temp_image);
@@ -44,8 +50,8 @@ class particle_emitter{
     vec2 launch_velocity;
 
     // Emitter area
-    vec2 min_pos;
-    vec2 max_pos;
+    vec2 position;
+    vec2 size;
 
     // Create particle
     void create_particle( int x, int y);

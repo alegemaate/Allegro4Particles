@@ -10,17 +10,18 @@ particle::particle( int x = 0, int y = 0, vec2 velocity = vec2( 0, 0), vec2 acce
 
   this -> colorStart = colorStart;
   this -> colorEnd = colorEnd;
-  mix_colors();
+  this -> color = colorStart;
 
   this -> size = size;
-  this -> life = this -> life_start = life;
-
-  type = CIRCLE;
+  this -> life = life;
+  this -> life_start = life;
 
   this -> image = NULL;
 
   this -> type = type;
   this -> trans_life = trans_life;
+
+  mix_colors();
 }
 
 // Make new color
@@ -33,9 +34,7 @@ void particle::mix_colors(){
   int b_1 = getb(colorStart);
   int b_2 = getb(colorEnd);
 
-  this -> color = makecol( (r_1 * life + r_2 * (life_start - life)) / life_start,
-                           (g_1 * life + g_2 * (life_start - life)) / life_start,
-                           (b_1 * life + b_2 * (life_start - life)) / life_start);
+  this -> color = makecol( (r_1 * life + r_2 * (life_start - life)) / life_start, (g_1 * life + g_2 * (life_start - life)) / life_start, (b_1 * life + b_2 * (life_start - life)) / life_start);
 }
 
 // Is dead
