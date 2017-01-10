@@ -1,7 +1,7 @@
 #include "particle.h"
 
 // Constructor
-particle::particle( int x = 0, int y = 0, vec2 velocity = vec2( 0, 0), vec2 acceleration = vec2( 0, 0), int size = 1, int colorStart = 0xFFFFFF, int colorEnd = 0xFFFFFF, int life = 100, char type = PIXEL){
+particle::particle( int x = 0, int y = 0, vec2 velocity = vec2( 0, 0), vec2 acceleration = vec2( 0, 0), int size = 1, int colorStart = 0xFFFFFF, int colorEnd = 0xFFFFFF, int life = 100, char type = PIXEL, bool trans_life = false){
   this -> x = x;
   this -> y = y;
 
@@ -20,6 +20,7 @@ particle::particle( int x = 0, int y = 0, vec2 velocity = vec2( 0, 0), vec2 acce
   this -> image = NULL;
 
   this -> type = type;
+  this -> trans_life = trans_life;
 }
 
 // Make new color
@@ -65,10 +66,12 @@ void particle::update( int dt){
 // Draw
 void particle::draw( BITMAP* tempBitmap){
   if( !dead()){
+    if( trans_life){
+      set_trans_blender( 255, 255, 255, int(float(life)/life_start * 255));
+    }
+
     if( type == IMAGE && image != NULL){
-      //set_trans_blender( 255, 255, 255, int(float(life)/life_start * 255));
       set_alpha_blender();
-      //circlefill( tempBitmap, x, y, image -> w / 2, color);
       draw_trans_sprite( tempBitmap, image, x - image -> w / 2, y - image -> w / 2);
     }
     else if( type == PIXEL){

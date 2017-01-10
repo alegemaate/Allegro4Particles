@@ -20,7 +20,7 @@
 class particle{
   public:
     // Constructor
-    particle( int x, int y, vec2 velocity, vec2 acceleration, int size, int colorStart, int colorEnd, int life, char type);
+    particle( int x, int y, vec2 velocity, vec2 acceleration, int size, int colorStart, int colorEnd, int life, char type, bool trans_life);
 
     // Destructor
     ~particle() {};
@@ -51,6 +51,7 @@ class particle{
     int colorEnd;
     int color;
     char type;
+    bool trans_life;
 
     BITMAP* image;
 
