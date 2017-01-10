@@ -93,11 +93,11 @@ void update( int dt){
     for( int i = 0; i < my_emitters.size(); i ++){
       if( key[KEY_Z])
         my_emitters.at(i).create_particle( 0);
-      else if( key[KEY_X])
+      if( key[KEY_X])
         my_emitters.at(i).create_particle( 1);
-      else if( key[KEY_C])
+      if( key[KEY_C])
         my_emitters.at(i).create_particle( 2);
-      else if( key[KEY_V])
+      if( key[KEY_V])
         my_emitters.at(i).create_particle( 3);
     }
   }
