@@ -41,7 +41,7 @@
 	<fstream>
 	<cmath>
 
-1483991528 source:c:\users\allan\documents\games indev\!experiments\particles\src\main.cpp
+1484082549 source:c:\users\allan\documents\games indev\!experiments\particles\src\main.cpp
 	<allegro.h>
 	<alpng.h>
 	<ctime>
@@ -76,7 +76,7 @@
 1483990250 source:c:\users\allan\documents\games indev\!experiments\particles\src\particle.cpp
 	"particle.h"
 
-1483991671 source:c:\users\allan\documents\games indev\!experiments\particles\src\particle_emitter.cpp
+1484082963 source:c:\users\allan\documents\games indev\!experiments\particles\src\particle_emitter.cpp
 	"particle_emitter.h"
 
 1483841169 source:c:\users\allan\documents\games indev\!experiments\particles\src\tools.cpp

@@ -45,12 +45,7 @@ END_OF_FUNCTION(delta_time_ticker)
 // Buffer
 BITMAP *buffer;
 
-// Our emitter
-particle_emitter test_emitter;
-particle_emitter test_emitter2;
-particle_emitter test_emitter3;
-
-
+// Emitters
 std::vector<particle_emitter> my_emitters;
 
 // Setup
@@ -85,57 +80,37 @@ void setup(){
   // Create buffer
   buffer = create_bitmap( SCREEN_W, SCREEN_H);
 
-  // Make emitter
-  test_emitter = particle_emitter( vec2( 0, 0), vec2( 100, 10));
-  test_emitter2 = particle_emitter( vec2( 0, 0), vec2( 100, 20));
-  test_emitter3 = particle_emitter( vec2( 0, 0), vec2( 100, 10));
-
-  for( int i = 0; i < 1000; i ++){
-    particle_emitter tempEmitter = particle_emitter( vec2( SCREEN_W/2, SCREEN_H), vec2( SCREEN_W/2, SCREEN_H));
+  for( int i = 0; i < 20; i ++){
+    particle_emitter tempEmitter = particle_emitter( vec2( 0, 0), vec2( 10, 0));
     my_emitters.push_back(tempEmitter);
   }
 }
 
 // Update
 void update( int dt){
-  // Update our emitter
-  test_emitter.update( dt);
-  test_emitter2.update( dt);
-  test_emitter3.update( dt);
-
-  // Make new particles
-  if( mouse_b){
-    for( int i = 0; i < 5; i++){
-      test_emitter.create_particle( 0);
-      test_emitter2.create_particle( 1);
-      test_emitter3.create_particle( 3);
-    }
-  }
-
-  if( key[KEY_SPACE]){
+  // Make particles
+  if( key[KEY_Z] || key[KEY_X] || key[KEY_C] || key[KEY_V]){
     for( int i = 0; i < my_emitters.size(); i ++){
-      my_emitters.at(i).create_particle( 3);
+      if( key[KEY_Z])
+        my_emitters.at(i).create_particle( 0);
+      else if( key[KEY_X])
+        my_emitters.at(i).create_particle( 1);
+      else if( key[KEY_C])
+        my_emitters.at(i).create_particle( 2);
+      else if( key[KEY_V])
+        my_emitters.at(i).create_particle( 3);
     }
   }
   for( int i = 0; i < my_emitters.size(); i ++){
     my_emitters.at(i).update( dt);
+    my_emitters.at(i).move_to( vec2( mouse_x, mouse_y));
   }
-
-  // Move emitter to mouse
-  test_emitter.move_to( vec2( mouse_x, mouse_y));
-  test_emitter2.move_to( vec2( mouse_x, mouse_y));
-  test_emitter3.move_to( vec2( mouse_x, mouse_y));
 }
 
 // Draw
 void draw(){
   // Clear buffer
   clear_to_color( buffer, 0x000000);
-
-  // Draw emitter particles
-  //test_emitter.draw( buffer);
-  //test_emitter3.draw( buffer);
-  //test_emitter2.draw( buffer);
 
   for( int i = 0; i < my_emitters.size(); i ++){
     my_emitters.at(i).draw( buffer);
