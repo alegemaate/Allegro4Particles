@@ -71,7 +71,7 @@ void particle_emitter::create_particle( int type){
                       vec2( 1, random( 3, 20)), 0x0000FF, 0x0000AA, 200, RECTANGLE, false);
     particles.push_back( newPart);
   }
-  // Explosion
+  // Explosion (this is just wrong!) FRIGGED IN THE HEAD IF U WILL
   if( type == 6){
     // On death creation
     particle *newPart2 = new particle( random( position.x, position.x + size.x), random( position.y, position.y + size.y),
@@ -83,6 +83,8 @@ void particle_emitter::create_particle( int type){
     particle *newPart = new particle( random( position.x, position.x + size.x), random( position.y, position.y + size.y),
                       vec2( 0), vec2( randomf( -0.2, 0.2), randomf( -0.2, 0.2)),
                       vec2( random( 3, 8)), 0xFFFF00, 0xFF0000, 50, RECTANGLE, false);
+
+    // Point to each other
     newPart -> onDeath = newPart2;
     newPart2 -> onDeath = newPart;
 
@@ -109,7 +111,7 @@ void particle_emitter::move_to( vec2 position){
 void particle_emitter::update( int dt){
   // Update each particle
   for( unsigned int i = 0; i < particles.size(); i++){
-    if( particles.at(i).dead()){
+    if( particles.at(i).dead() || key[KEY_BACKSPACE]){
       particles.erase( particles.begin() + i);
     }
     else{
