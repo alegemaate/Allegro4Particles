@@ -18,6 +18,7 @@ particle_emitter::particle_emitter( vec2 position, vec2 size){
 
   // Load image
   image = load_bitmap( "images/fuzzball.png", NULL);
+  image2 = load_bitmap( "images/fire.png", NULL);
 }
 
 // Destructor
@@ -27,55 +28,55 @@ particle_emitter::~particle_emitter(){
 
 // Create particles
 void particle_emitter::create_particle( int type){
+  // Smoke
   if( type == 0){
-    // Smoke
-    particle newPart1( random( position.x, position.x + size.x), random( position.y, position.y + size.y),
-                      vec2( randomf( -0.1, 0.2), randomf( -0.1, -0.5)),
-                      vec2( 0.003, -0.003),
-                      random( 5, 8), 0xFFFFFF, 0x000000, random( 500, 1000), IMAGE, true);
-    newPart1.set_image( image);
-    particles.push_back( newPart1);
-    this -> type = type;
+    particle newPart( random( position.x, position.x + size.x), random( position.y, position.y + size.y),
+                      vec2( randomf( -0.1, 0.2), randomf( -0.1, -0.5)), vec2( 0.003, -0.003),
+                      vec2( random( 5, 8)), 0xFFFFFF, 0x000000, random( 500, 1000), IMAGE, true);
+    newPart.set_image( image);
+    particles.push_back( newPart);
   }
-
+  // Fire
   if( type == 1){
-    // Fire
-    particle newPart4( random( position.x, position.x + size.x), random( position.y, position.y + size.y),
-                      vec2( randomf( -0.5, 0.5), randomf( -1, -2)),
-                      vec2( 0, randomf( 0.01, 0.03)),
-                      random( 4, 8), 0xFFAA00, 0xFF0000, random( 20, 80), SQUARE, false);
-    particles.push_back( newPart4);
-    this -> type = type;
+    particle newPart( random( position.x, position.x + size.x), random( position.y, position.y + size.y),
+                      vec2( randomf( -0.5, 0.5), randomf( -1, -2)), vec2( 0, randomf( 0.01, 0.03)),
+                      vec2( random( 4, 8)), 0xFFAA00, 0xFF0000, random( 20, 80), RECTANGLE, false);
+    particles.push_back( newPart);
   }
-
+  // Water
   if( type == 2){
-    // Water
-    particle newPart2( random( position.x, position.x + size.x), random( position.y, position.y + size.y),
-                      vec2( randomf( -1, 1), randomf( -10, -5)),
-                      vec2( 0, 0.1),
-                      random( 4, 6), 0x0000FF, 0x000000, random( 200, 400), CIRCLE, true);
-    particles.push_back( newPart2);
-    this -> type = type;
+    particle newPart( random( position.x, position.x + size.x), random( position.y, position.y + size.y),
+                      vec2( randomf( -1, 1), randomf( -10, -5)), vec2( 0, 0.1),
+                      vec2( random( 2, 6)), 0x0000FF, 0x000000, random( 200, 400), CIRCLE, true);
+    particles.push_back( newPart);
   }
-
+  // Spark
   if( type == 3){
-    // Spark
-    particle newPart3( random( position.x, position.x + size.x), random( position.y, position.y + size.y),
-                      vec2( randomf( -2, 2), randomf( -3, -5)),
-                      vec2( 0, randomf( 0.1, 0.2)),
-                      random( 1, 3), 0xFFAA00, 0xFF0000, random( 10, 50), PIXEL, false);
-    particles.push_back( newPart3);
-    this -> type = type;
+    particle newPart( random( position.x, position.x + size.x), random( position.y, position.y + size.y),
+                      vec2( randomf( -2, 2), randomf( -3, -5)), vec2( 0, randomf( 0.1, 0.2)),
+                      vec2( 0), 0xFFAA00, 0xFF0000, random( 10, 50), PIXEL, false);
+    particles.push_back( newPart);
   }
-
+  // Cool bubbles
   if( type == 4){
-    // Bubbles
-    particle newPart3( random( position.x, position.x + size.x), random( position.y, position.y + size.y),
-                      vec2( randomf( -2, 2), randomf( -3, -5)),
-                      vec2( 0, randomf( 0.1, 0.2)),
-                      random( 1, 3), 0xFFAA00, 0xFF0000, random( 10, 50), PIXEL, false);
-    particles.push_back( newPart3);
-    this -> type = type;
+    particle newPart( random( position.x, position.x + size.x), random( position.y, position.y + size.y),
+                      vec2( randomf( -0.01, 0.01), randomf( -0.1, -0.1)), vec2( 0, randomf( -0.01, -0.02)),
+                      vec2( random( 10, 30)), 0x0000FF, 0xFF0000, random( 100, 500), CIRCLE, false);
+    particles.push_back( newPart);
+  }
+  // Rain
+  if( type == 5){
+    particle newPart( random( position.x, position.x + size.x), random( position.y, position.y + size.y),
+                      vec2( 0), vec2( 0.005, 0.05),
+                      vec2( 1, random( 3, 20)), 0x0000FF, 0x0000AA, 200, RECTANGLE, false);
+    particles.push_back( newPart);
+  }
+  // Explosion
+  if( type == 6){
+    particle newPart( random( position.x, position.x + size.x), random( position.y, position.y + size.y),
+                      vec2( 0), vec2( randomf( -0.2, 0.2), randomf( -0.2, 0.2)),
+                      vec2( random( 3, 8)), 0xFFFF00, 0xFF0000, 50, RECTANGLE, false);
+    particles.push_back( newPart);
   }
 }
 

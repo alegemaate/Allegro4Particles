@@ -8,7 +8,7 @@
 #define PARTICLE_H
 
 #define CIRCLE 0
-#define SQUARE 1
+#define RECTANGLE 1
 #define PIXEL 2
 #define RANDOM 3
 #define IMAGE 4
@@ -20,7 +20,7 @@
 class particle{
   public:
     // Constructor
-    particle( int x, int y, vec2 velocity, vec2 acceleration, int size, int colorStart, int colorEnd, int life, char type, bool trans_life);
+    particle( int x, int y, vec2 velocity, vec2 acceleration, vec2 size, int colorStart, int colorEnd, int life, char type, bool trans_life);
 
     // Destructor
     ~particle() {};
@@ -44,7 +44,7 @@ class particle{
     // Position / size
     float x;
     float y;
-    int size;
+    vec2 size;
 
     // Looks
     int colorStart;

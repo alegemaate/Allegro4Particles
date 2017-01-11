@@ -1,7 +1,7 @@
 #include "particle.h"
 
 // Constructor
-particle::particle( int x = 0, int y = 0, vec2 velocity = vec2( 0, 0), vec2 acceleration = vec2( 0, 0), int size = 1, int colorStart = 0xFFFFFF, int colorEnd = 0xFFFFFF, int life = 100, char type = PIXEL, bool trans_life = false){
+particle::particle( int x = 0, int y = 0, vec2 velocity = vec2( 0), vec2 acceleration = vec2( 0), vec2 size = vec2( 1), int colorStart = 0xFFFFFF, int colorEnd = 0xFFFFFF, int life = 100, char type = PIXEL, bool trans_life = false){
   this -> x = x;
   this -> y = y;
 
@@ -13,6 +13,7 @@ particle::particle( int x = 0, int y = 0, vec2 velocity = vec2( 0, 0), vec2 acce
   this -> color = colorStart;
 
   this -> size = size;
+
   this -> life = life;
   this -> life_start = life;
 
@@ -27,14 +28,11 @@ particle::particle( int x = 0, int y = 0, vec2 velocity = vec2( 0, 0), vec2 acce
 // Make new color
 void particle::mix_colors(){
   // For readability
-  int r_1 = getr(colorStart);
-  int r_2 = getr(colorEnd);
-  int g_1 = getg(colorStart);
-  int g_2 = getg(colorEnd);
-  int b_1 = getb(colorStart);
-  int b_2 = getb(colorEnd);
+  int c_red = (getr(colorStart) * life + getr(colorEnd) * (life_start - life)) / life_start;
+  int c_green = (getg(colorStart) * life + getg(colorEnd) * (life_start - life)) / life_start;
+  int c_blue = (getb(colorStart) * life + getb(colorEnd) * (life_start - life)) / life_start;
 
-  this -> color = makecol( (r_1 * life + r_2 * (life_start - life)) / life_start, (g_1 * life + g_2 * (life_start - life)) / life_start, (b_1 * life + b_2 * (life_start - life)) / life_start);
+  this -> color = makecol( c_red, c_green, c_blue);
 }
 
 // Is dead
@@ -77,10 +75,10 @@ void particle::draw( BITMAP* tempBitmap){
       putpixel( tempBitmap, x, y, color);
     }
     else if( type == CIRCLE){
-      circlefill( tempBitmap, x, y, size/2, color);
+      circlefill( tempBitmap, x, y, size.x/2, color);
     }
-    else if( type == SQUARE){
-      rectfill( tempBitmap, x, y, x + size, y + size, color);
+    else if( type == RECTANGLE){
+      rectfill( tempBitmap, x, y, x + size.x, y + size.y, color);
     }
   }
 }

@@ -10,7 +10,8 @@
 class vec2{
   public:
     vec2();
-    vec2( float x1, float x2);
+    vec2( float new_x, float new_y);
+    vec2( float x_y);
 
     float x;
     float y;

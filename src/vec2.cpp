@@ -11,3 +11,9 @@ vec2::vec2( float new_x, float new_y){
   this -> x = new_x;
   this -> y = new_y;
 }
+
+// Same in both!
+vec2::vec2( float x_y){
+  this -> x = x_y;
+  this -> y = x_y;
+}
