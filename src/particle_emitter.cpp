@@ -18,7 +18,7 @@ particle_emitter::particle_emitter( vec2 position, vec2 size){
 
   // Load image
   image = load_bitmap( "images/fuzzball.png", NULL);
-  image2 = load_bitmap( "images/fire.png", NULL);
+  image2 = load_bitmap( "images/fuzzball2.png", NULL);
 }
 
 // Destructor
@@ -73,9 +73,27 @@ void particle_emitter::create_particle( int type){
   }
   // Explosion
   if( type == 6){
-    particle newPart( random( position.x, position.x + size.x), random( position.y, position.y + size.y),
+    // On death creation
+    particle *newPart2 = new particle( random( position.x, position.x + size.x), random( position.y, position.y + size.y),
+                      vec2( randomf( -0.1, 0.1), randomf( 0.1, -0.1)), vec2( 0),
+                      vec2( random( 5, 8)), 0xFFFFFF, 0x000000, random( 100, 400), IMAGE, true);
+    newPart2 -> set_image( image);
+
+    // Our primary particle
+    particle *newPart = new particle( random( position.x, position.x + size.x), random( position.y, position.y + size.y),
                       vec2( 0), vec2( randomf( -0.2, 0.2), randomf( -0.2, 0.2)),
                       vec2( random( 3, 8)), 0xFFFF00, 0xFF0000, 50, RECTANGLE, false);
+    newPart -> onDeath = newPart2;
+    newPart2 -> onDeath = newPart;
+
+    particles.push_back( *newPart);
+  }
+  // Clouds
+  if( type == 7){
+    particle newPart( random( position.x, position.x + size.x), random( position.y, position.y + size.y),
+                      vec2( randomf( 0.05, 0.1), 0), vec2( 0),
+                      vec2( 0), 0xFFFFFF, 0x000000, random( 1800, 2000), IMAGE, true);
+    newPart.set_image( image2);
     particles.push_back( newPart);
   }
 }

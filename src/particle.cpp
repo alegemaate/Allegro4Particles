@@ -22,6 +22,8 @@ particle::particle( int x = 0, int y = 0, vec2 velocity = vec2( 0), vec2 acceler
   this -> type = type;
   this -> trans_life = trans_life;
 
+  this -> onDeath = NULL;
+
   mix_colors();
 }
 
@@ -37,8 +39,23 @@ void particle::mix_colors(){
 
 // Is dead
 bool particle::dead(){
-  if( life <= 0)
-    return true;
+  if( life <= 0){
+    if( onDeath == NULL){
+      return true;
+    }
+    else{
+      velocity = onDeath -> velocity;
+      acceleration = onDeath -> acceleration;
+      size = onDeath -> size;
+      colorStart = onDeath -> colorStart;
+      colorEnd = onDeath -> colorEnd;
+      life = onDeath -> life;
+      type = onDeath -> type;
+      trans_life = onDeath -> trans_life;
+      image = onDeath -> image;
+      onDeath = onDeath -> onDeath;
+    }
+  }
   return false;
 }
 
@@ -46,6 +63,11 @@ bool particle::dead(){
 void particle::set_image( BITMAP *image){
   this -> image = image;
   this -> type = IMAGE;
+}
+
+// Set particle to spawn on death
+void particle::set_particle_ondeath( particle *onDeath){
+  this -> onDeath = onDeath;
 }
 
 // Logic

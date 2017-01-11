@@ -31,13 +31,17 @@ class particle{
     // Set image
     void set_image( BITMAP *image);
 
+    // Set particle to spawn on death
+    void set_particle_ondeath( particle *onDeath);
+
     // Update
     void update( int dt);
 
     // Draw
     void draw(BITMAP *tempBitmap);
 
-  private:
+
+
     // Make new color
     void mix_colors();
 
@@ -55,11 +59,16 @@ class particle{
 
     BITMAP* image;
 
+    particle *onDeath;
+
     // Behavior
     vec2 velocity;
     vec2 acceleration;
     int life;
     int life_start;
+
+  private:
+
 };
 
 #endif

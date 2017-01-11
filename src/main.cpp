@@ -89,42 +89,43 @@ void setup(){
 
 // Update
 void update( int dt){
-  // Make particles
-  if( key[KEY_Z] || key[KEY_X] || key[KEY_C] || key[KEY_V] || key[KEY_B] || key[KEY_N] || key[KEY_M]){
-    for( unsigned int i = 0; i < my_emitters.size(); i ++){
-      if( key[KEY_Z]){
-        my_emitters.at(i).set_size( vec2( 10, 10));
-        my_emitters.at(i).create_particle( 0);
-      }
-      if( key[KEY_X]){
-        my_emitters.at(i).set_size( vec2( 100, 5));
-        my_emitters.at(i).create_particle( 1);
-      }
-      if( key[KEY_C]){
-        my_emitters.at(i).set_size( vec2( 1));
-        my_emitters.at(i).create_particle( 2);
-      }
-      if( key[KEY_V]){
-        my_emitters.at(i).set_size( vec2( 0));
-        my_emitters.at(i).create_particle( 3);
-      }
-      if( key[KEY_B]){
-        my_emitters.at(i).set_size( vec2( 0));
-        my_emitters.at(i).create_particle( 4);
-      }
-      if( key[KEY_N]){
-        my_emitters.at(i).set_size( vec2( SCREEN_W/2, 0));
-        my_emitters.at(i).create_particle( 5);
-      }
-      if( key[KEY_M]){
-        my_emitters.at(i).set_size( vec2( 2));
-        my_emitters.at(i).create_particle( 6);
-      }
-    }
-  }
+  // Update and make particles
   for( unsigned int i = 0; i < my_emitters.size(); i ++){
     my_emitters.at(i).update( dt);
     my_emitters.at(i).move_to( vec2( mouse_x, mouse_y));
+
+    if( key[KEY_Z]){
+      my_emitters.at(i).set_size( vec2( 10, 10));
+      my_emitters.at(i).create_particle( 0);
+    }
+    if( key[KEY_X]){
+      my_emitters.at(i).set_size( vec2( 100, 5));
+      my_emitters.at(i).create_particle( 1);
+    }
+    if( key[KEY_C]){
+      my_emitters.at(i).set_size( vec2( 1));
+      my_emitters.at(i).create_particle( 2);
+    }
+    if( key[KEY_V]){
+      my_emitters.at(i).set_size( vec2( 0));
+      my_emitters.at(i).create_particle( 3);
+    }
+    if( key[KEY_B]){
+      my_emitters.at(i).set_size( vec2( 0));
+      my_emitters.at(i).create_particle( 4);
+    }
+    if( key[KEY_N]){
+      my_emitters.at(i).set_size( vec2( SCREEN_W/2, 0));
+      my_emitters.at(i).create_particle( 5);
+    }
+    if( key[KEY_M]){
+      my_emitters.at(i).set_size( vec2( 2));
+      my_emitters.at(i).create_particle( 6);
+    }
+    if( key[KEY_A]){
+      my_emitters.at(i).set_size( vec2( 100));
+      my_emitters.at(i).create_particle( 7);
+    }
   }
 }
 
