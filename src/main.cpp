@@ -115,7 +115,7 @@ void update( int dt){
       my_emitters.at(i).create_particle( 4);
     }
     if( key[KEY_N]){
-      my_emitters.at(i).set_size( vec2( SCREEN_W/2, 0));
+      my_emitters.at(i).set_size( vec2( SCREEN_W/2, 100));
       my_emitters.at(i).create_particle( 5);
     }
     if( key[KEY_M]){

@@ -67,9 +67,21 @@ void particle_emitter::create_particle( int type){
   }
   // Rain
   if( type == 5){
-    particle newPart( random( position.x, position.x + size.x), random( position.y, position.y + size.y),
+    particle *newPart3 = new particle( random( position.x, position.x + size.x), random( position.y, position.y + size.y),
+                      vec2( 0, -0.5), vec2( 0, 0.01),
+                      vec2( 0), 0x0000AA, 0xFFFFFF, 100, PIXEL, false);
+
+    particle *newPart2 = new particle( random( position.x, position.x + size.x), random( position.y, position.y + size.y),
                       vec2( 0), vec2( 0.005, 0.05),
-                      vec2( 1, random( 3, 20)), 0x0000FF, 0x0000AA, 200, RECTANGLE, false);
+                      vec2( 1, random( 3, 20)), 0x0000FF, 0x0000AA, 120, RECTANGLE, false);
+
+    particle newPart( random( position.x, position.x + size.x), random( position.y, position.y + size.y),
+                      vec2( randomf( 0.05, 0.1), 0), vec2( 0),
+                      vec2( 0), 0xFFFFFF, 0x000000, random( 100, 300), IMAGE, true);
+    newPart.set_image( image2);
+
+    newPart2 -> onDeath = newPart3;
+    newPart.onDeath = newPart2;
     particles.push_back( newPart);
   }
   // Explosion (this is just wrong!) FRIGGED IN THE HEAD IF U WILL
