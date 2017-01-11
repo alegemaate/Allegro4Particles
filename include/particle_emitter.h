@@ -45,6 +45,7 @@ class particle_emitter{
     // Fuzzy image
     BITMAP *image;
     BITMAP *image2;
+    BITMAP *image3;
 
     // Velocity
     vec2 launch_velocity;

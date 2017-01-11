@@ -126,6 +126,10 @@ void update( int dt){
       my_emitters.at(i).set_size( vec2( 100));
       my_emitters.at(i).create_particle( 7);
     }
+    if( key[KEY_S]){
+      my_emitters.at(i).set_size( vec2( 10));
+      my_emitters.at(i).create_particle( 8);
+    }
   }
 }
 

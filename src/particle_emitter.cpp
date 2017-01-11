@@ -19,6 +19,7 @@ particle_emitter::particle_emitter( vec2 position, vec2 size){
   // Load image
   image = load_bitmap( "images/fuzzball.png", NULL);
   image2 = load_bitmap( "images/fuzzball2.png", NULL);
+  image3 = load_bitmap( "images/fuzzball_blue.png", NULL);
 }
 
 // Destructor
@@ -96,6 +97,14 @@ void particle_emitter::create_particle( int type){
                       vec2( randomf( 0.05, 0.1), 0), vec2( 0),
                       vec2( 0), 0xFFFFFF, 0x000000, random( 1800, 2000), IMAGE, true);
     newPart.set_image( image2);
+    particles.push_back( newPart);
+  }
+  // Comet
+  if( type == 8){
+    particle newPart( random( position.x, position.x + size.x), random( position.y, position.y + size.y),
+                      vec2( randomf( -0.4, 0.4), randomf( -0.2, 0.2)), vec2( 0.03, -0.03),
+                      vec2( random( 5, 8)), 0xFFFFFF, 0x000000, random( 300, 500), IMAGE, true);
+    newPart.set_image( image3);
     particles.push_back( newPart);
   }
 }
